@@ -1,0 +1,446 @@
+# Events for Poland, mainly around the November Uprising (Powstanie Listopadowe)
+#
+# 1118001: The Fate of Poland - choose govt
+# 11180021: Revolution in Poland! - for PRU
+# 11180022: Revolution in Poland! - for AUS
+# 1118003: Dancing with the Bear
+# 1118004: "The Regency Must End"
+# 1118005: Know Your Master - 1118003 negotiation option "Status Quo Ante Bellum"
+# 1118006: Know Your Master - 1118003 negotiation option "We will settle for greater autonomy"
+#     1118007: Russia Refuses!
+#     1118008: Autonomy Restored
+#     1118009: Independence, under Russian Supervision
+#
+# MONARCHS - in case i feel like writing events for their ascensions/deaths later
+#
+# Czartoryski succession:
+# -Prince Adam Jerzy Czartoryski crowned Adam I (d. 1861)
+#   -son Witold (d. 1865)
+#     -brother Wladyslaw (d. 1893)
+#       (-son August (d. 1893) -- very frail, constantly sick)
+#       -son Adam Ludwik (d. 1937)
+#         -son Augustyn Józef (d. 1946) -- also had bad health, lived in exile in spain
+#           -son Adam Karol (still alive in 2025)
+#
+# Radziwill succession:
+# -Prince Michal Radziwill crowned King Michal I (d. 1850) -- genius general, defended gdansk
+#   -son Karol Andrzej (d. 1886) -- ???
+#     -son Michal Piotr (d. 1903) -- set up an orphanage, wrote plays, supported cultural stuff
+#       -brother Janusz Franciszek (d. 1967) -- senator, businessman and landholder. Foreign policy expert
+#		  -son Edmund
+#
+# Planned events:
+# 1118010: Return of the Exiles
+#     -MTTH 6 months; at peace
+#     -"Returning Exiles" modifier for 15 years
+#       *research points +5%
+#       *education efficiency +5%
+# 1118011: Marriage to the Sea
+#     -MTTH 1 day; owns at least 1 coastal province
+#     -Free prestige
+#  OR -Spend money for "Naval focus" modifier (temporary boost to naval research, ship building speed)
+# 1118012: The Grand Theatre of Warsaw
+#     -MTTH 1 month; owns Warsaw; at peace; date at least 24 Feb 1833
+#     -Prestige; Cultural tech boost
+#     -NOTE: construction began in 1825, so this should be an event
+# 1118013: Organic Work at Home (variant of the IRL thing, against landowners)
+#     -MTTH 2 years; debt law is Serfdom/Peonage
+#     -In a single region:
+#         -education eff +5%
+#		  -add con, +desire for abolish serfdom
+#      OR -Tank education eff, add militancy
+# 1118014: Jewish Community Threatened
+#     -MTTH 1 year (faster if reactionaries in power); Ashkenazi not accepted
+#     -not sure yet, but this should be a possible event anywhere with >8% Ashkenazi pops
+# 1118015: Napoleon's Example (alliance with france)
+#     -MTTH 1 year; relations with france +50; rank >16; France is NOT allied with PRU, GER, AUS, KUK, RUS
+#     -option to form alliance w France (also increases relations +25)
+#
+# Planned decisions:
+# Renovate Warsaw University
+#     -Owns Warsaw
+#     -One time dump of research points
+# Land Reform
+#     -Debt law not Serfdom/Peonage; Economic policy not Laissez-Faire (ie oppose intervention)
+#     -Add "national chaos" modifier; Add mil for upper classes; Add "land reform" modifier (idk pop boost?)
+
+
+# The Fate of Poland - choose govt
+country_event = {
+	id = 1118001
+	title = "The Fate of Poland"
+	desc = "EVTDESC1118001"
+	picture = "november_uprising_event"
+	fire_only_once = yes
+
+	trigger = {
+		tag = POL
+		war_with = RUS
+		war_score = 4 # Winning a little v Russia takes about a year
+	}
+
+	# In testing, I could not get MTTH to actually work properly. Set to 1 day so it fires in time.
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "Fight! For our freedom and yours!"
+		
+		government = democracy
+		set_country_flag = pol_revolution # means PRU and AUS can intervene
+		war_exhaustion = -25 # regrouping effect - poland will fight harder but still lose
+		prestige = 25
+		add_country_modifier = { # Revolution is messy
+			name = national_instability
+			duration = 365
+		}
+		
+		# PRU and AUS get option to intervene - POL removed from RUS sphere to allow war
+		RUS = { remove_from_sphere = POL }
+		PRU = { country_event = 11180021 }
+		AUS = { country_event = 11180022 }
+		
+		# AI will usually do the suicidal republic path, if they even make it this far
+		ai_chance = { factor = 0.75 }
+	}
+	option = {
+		name = "We'll see. For now, we will form a regency council."
+
+		set_country_flag = pol_regency
+		government = prussian_constitutionalism # change govt back to monarchy, just not absolute monarchy
+		plurality = 10 # good temporary unity decision
+	}
+	option = {
+		name = "Prince Czartoryski will be crowned King Adam I."
+		
+		set_country_flag = pol_czartoryski
+		government = prussian_constitutionalism # change govt back to monarchy, just not absolute monarchy
+		add_country_modifier = { # Adam Czartoryski (d. 1861)
+			name = great_statesman
+			duration = 10000 # about 28 years - about 1860
+		}
+		plurality = -10 # the revolution is blunted by the feeling of return to monarchy
+	}
+}
+
+
+# Revolution in Poland! - for PRU
+country_event = {
+	id = 11180021
+	title = "Revolution in Poland!"
+	desc = "EVTDESC1118002"
+	picture = "november_uprising_event"
+	is_triggered_only = yes # triggered by other Nov Uprising events
+
+	option = {
+		name = "We must stop them!"
+		
+		# alliance with Russia and start war
+		create_alliance = RUS
+		war = {
+			target = POL
+			attacker_goal = { casus_belli = acquire_any_state state_province_id = 706 } # Mazowsze area
+			defender_goal = { casus_belli = status_quo }
+		}
+		
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = "There are more important things right now."
+	}
+}
+
+# Revolution in Poland! - for AUS
+country_event = {
+	id = 11180022
+	title = "Revolution in Poland!"
+	desc = "EVTDESC1118002"
+	picture = "november_uprising_event"
+	is_triggered_only = yes # triggered by other Nov Uprising events
+
+	option = {
+		name = "We must stop them!"
+		
+		# alliance with Russia and start war
+		create_alliance = RUS
+		war = {
+			target = POL
+			attacker_goal = { casus_belli = acquire_any_state state_province_id = 711 } # Lublin area
+			defender_goal = { casus_belli = status_quo }
+		}
+		
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = "There are more important things right now."
+	}
+}
+
+
+# 1118003: Dancing with the Bear
+country_event = {
+	id = 1118003
+	title = "Dancing with the Bear"
+	desc = "EVTDESC1118003"
+	picture = "poland_peace_event" # Bialystok palace branicki
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			has_country_flag = pol_regency
+			has_country_flag = pol_czartoryski
+		}
+		war_with = RUS
+		war_score = 1 # Winning v RUS
+	}
+
+	# In testing, I could not get MTTH to actually work properly. Set to 1 day so it fires in time.
+	mean_time_to_happen = { days = 1 }
+
+	option = {
+		name = "We will settle for greater autonomy."
+		
+		# This option ONLY works if you have czartoryski as king
+		RUS = { country_event = 1118006 }
+		
+        ai_chance = { factor = 1 }
+	}
+	option = {
+		name = "We will not negotiate."
+		
+		RUS = { remove_from_sphere = POL }
+		RUS = { remove_influence = { target = POL value = 100 } }
+		
+		prestige = 5
+		
+		# PRU and AUS get option to intervene - POL removed from RUS sphere to allow war
+		RUS = { remove_from_sphere = POL }
+		PRU = { country_event = 11180021 }
+		AUS = { country_event = 11180022 }
+	}
+	option = {
+		name = "Status Quo Ante Bellum"
+		
+		# Regency / Czartoryski reign over - Tsar Nicholas I returns
+		clr_country_flag = pol_regency
+		clr_country_flag = pol_czartoryski
+		RUS = { country_event = 1118005 }
+		prestige = -25
+
+        ai_chance = { factor = 0 }
+	}
+}
+
+
+#  1118004: "The Regency Must End"
+country_event = {
+	id = 1118004
+	title = "The Regency Must End"
+	desc = "EVTDESC1118004"
+	picture = "radziwill_palace_event"
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = pol_regency
+		war = no
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = "We will crown Prince Radziwill as King Michal I."
+		
+		add_country_modifier = { # Michal Gideon Radziwill (d. 1850)
+			name = military_man
+			duration = 6205 # if it's about 1833, to 1850 is 17 years or 6205 days
+		}
+		
+		clr_country_flag = pol_regency
+		clr_country_flag = pol_revolution
+		
+        ai_chance = { factor = 0.4 }
+	}
+	option = {
+		name = "The regency train stops at independence station."
+		# inspired by Pilsudski quote "I rode the red tram of socialism and got off at Independence"
+		
+		prestige = 5
+		government = democracy
+		
+		clr_country_flag = pol_regency
+		clr_country_flag = pol_revolution
+		
+        ai_chance = { # AI more likely to do this if liberal
+			factor = 0.6
+			
+			modifier = {
+				factor = 1.5
+				ruling_party_ideology = liberal
+			}
+		}
+	}
+}
+
+
+# 1118005: Know Your Master - 1118003 negotiation option "Status Quo Ante Bellum"
+country_event = {
+	id = 1118005
+	title = "Know Your Master"
+	desc = "EVTDESC1118005"
+	picture = "poland_peace_event"
+	is_triggered_only = yes
+
+	option = {
+		name = "Very well."
+		
+		# End the war
+		end_war = POL
+		
+		# Make puppet - the rest is in the event
+		create_vassal = POL
+		POL = { country_event = 1118008 } # Autonomy restored
+		
+		# AI more open to quick peace
+        ai_chance = {
+			factor = 0.75
+		}
+	}
+	option = {
+		name = "We will not negotiate."
+		POL = { country_event = 1118007 }
+	}
+}
+
+
+# 1118006: Know Your Master - 1118003 negotiation option "We will settle for greater autonomy"
+country_event = {
+	id = 1118006
+	title = "Know Your Master"
+	desc = "EVTDESC1118006"
+	picture = "poland_peace_event"
+	is_triggered_only = yes
+
+	option = {
+		name = "Fine."
+		
+		# End the war
+		end_war = POL
+		
+		# Adds POL to sphere if not already
+		set_relation = { country = POL value = 15 }
+		add_to_sphere = POL
+		add_influence = { target = POL value = 100 }
+		POL = { country_event = 1118009 } # Independence, under russian supervision
+		
+		# AI will only take this option if Czartoryski is king
+        ai_chance = {
+			factor = 0.5
+			
+			modifier = {
+				factor = 100
+				POL = { has_country_flag = pol_czartoryski }
+			}
+		}
+	}
+	option = {
+		name = "We will not negotiate."
+		POL = { country_event = 1118007 } # Russia refuses peace!
+	}
+}
+
+
+# 1118007: Russia Refuses!
+country_event = {
+	id = 1118007
+	title = "Russia Refuses Peace!"
+	desc = "EVTDESC1118007"
+	picture = "november_uprising_event"
+	is_triggered_only = yes
+	option = { name = "So be it." }
+}
+
+# 1118008: Autonomy Restored
+country_event = {
+	id = 1118008
+	title = "Autonomy Restored"
+	desc = "EVTDESC1118008"
+	picture = "poland_peace_event"
+	is_triggered_only = yes
+	option = {
+		name = "I hope it was worth it."
+		
+		government = colonial_company # GFM autonomous dependency
+	}
+}
+
+# 1118009: Independence, under Russian Supervision
+country_event = {
+	id = 1118009
+	title = "Independence, under Russian Supervision"
+	desc = "EVTDESC1118009"
+	picture = "poland_peace_event"
+	is_triggered_only = yes
+	option = { name = "We will make the most of this." }
+}
+
+
+# 1118010: Return of the Exiles
+#     -MTTH 6 months; at peace
+#     -"Returning Exiles" modifier for 15 years
+#       *research points +5%
+#       *education efficiency +5%
+# 1118011: Marriage to the Sea
+#     -MTTH 1 day; owns at least 1 coastal province
+#     -Free prestige
+#  OR -Spend money for "Naval focus" modifier (temporary boost to naval research, ship building speed)
+# 1118012: The Grand Theatre of Warsaw
+#     -MTTH 1 month; owns Warsaw; at peace; date at least 24 Feb 1833
+#     -Prestige; Cultural tech boost
+#     -NOTE: construction began in 1825, so this should be an event
+# 1118013: Organic Work at Home (variant of the IRL thing, against landowners)
+#     -MTTH 2 years; debt law is Serfdom/Peonage
+#     -In a single region:
+#         -education eff +5%
+#		  -add con, +desire for abolish serfdom
+#      OR -Tank education eff, add militancy
+# 1118014: Jewish Community Threatened
+#     -MTTH 1 year (faster if reactionaries in power); Ashkenazi not accepted
+#     -not sure yet, but this should be a possible event anywhere with >8% Ashkenazi pops
+
+# 1118015: Napoleon's Example (alliance with france)
+country_event = {
+	id = 1118015
+	title = "Napoleon's Example" # reference to "Dal nam przyklad Bonaparte jak zwyciezac mamy" (Bonaparte gave us an example of how we should win)
+	desc = "EVTDESC1118015" #TODO - mention franco-polish friendship, ties, liberalism, duchy of warsaw, etc
+	picture = "poland_france" #TODO - photo of polish and french officers mingling?
+	fire_only_once = yes
+	
+	trigger = {
+		tag = POL
+		war = no
+		rank = 16 # Poland must be relevant
+		FRA = {
+			war = no
+			NOT = {
+				alliance_with = GER # alliance with strong germany more important
+				alliance_with = PRU
+				alliance_with = AUS
+			}
+		}
+		relation = { who = FRA  value = 15 } # vaguely "good" relations
+	}
+
+	option = {
+		name = "A splendid idea."
+		
+		FRA = {
+			add_influence = { target = POL value = 100 }
+			create_alliance = POL
+		}
+		
+        ai_chance = { factor = 1 }
+	}
+	option = {
+		name = "France? I'd rather not."
+		prestige = 5
+	}
+}
