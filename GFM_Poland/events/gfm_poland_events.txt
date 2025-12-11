@@ -356,13 +356,13 @@ country_event = {
 # 1118010: Returning Exiles
 country_event = {
 	id = 1118010
-	title = "Returning Exiles" # polonia is a term for the polish diaspora
-	desc = "EVTDESC1118010" #TODO - something abt exiles after the third partition or after duchy of warsaw
-	picture = "poland_chopin" #TODO - idk just any picture of chopin or exiles in france
+	title = "Returning Exiles"
+	desc = "EVTDESC1118010"
+	picture = "poland_exiles" # "Chopin plays for the Radziwills" by Siemiradzki, 1887
 	fire_only_once = yes
 	
 	trigger = {
-		tag = POL
+		OR = { tag = POL  tag = PLC  tag = PLR }
 		war = no
 	}
 
@@ -371,6 +371,7 @@ country_event = {
 	option = {
 		name = "We welcome them home."
 
+		prestige = 2
 		years_of_research = 2.5 # Transfer of knowledge
 		add_country_modifier = { # Mildly buffs education eff. and literacy impact
 			name = reading
@@ -384,8 +385,8 @@ country_event = {
 country_event = {
 	id = 1118011
 	title = "Wedding to the Sea"
-	desc = "EVTDESC1118011" #TODO - blurb from wikipedia or something
-	picture = "poland_sea" #TODO - the famous painting of Gen. Haller
+	desc = "EVTDESC1118011"
+	picture = "poland_wedding" # famous painting of gen. haller at the sea
 	fire_only_once = yes
 	
 	trigger = {
@@ -416,8 +417,8 @@ country_event = {
 country_event = {
 	id = 1118012
 	title = "Grand Theatre of Warsaw Complete!"
-	desc = "EVTDESC1118012" #TODO - blurb from wikipedia or something
-	picture = "poland_theatre" #TODO - photo of the grand theatre of warsaw
+	desc = "EVTDESC1118012"
+	picture = "poland_theatre"
 	fire_only_once = yes
 	
 	trigger = {
@@ -442,8 +443,8 @@ country_event = {
 country_event = {
 	id = 1118013
 	title = "Napoleon's Example" # reference to "Dal nam przyklad Bonaparte jak zwyciezac mamy" (Bonaparte gave us an example of how we should win)
-	desc = "EVTDESC1118013" #TODO - mention franco-polish friendship, ties, liberalism, duchy of warsaw, etc
-	picture = "poland_france" #TODO - photo of polish and french officers mingling?
+	desc = "EVTDESC1118013"
+	picture = "poland_france" # "Chopin's Polonaise - Ball at Hotel Lambert" by Teofil Kwiatowski, 1850
 	
 	trigger = {
 		tag = POL

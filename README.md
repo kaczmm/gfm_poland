@@ -6,8 +6,9 @@
 - changed map colour to be darker/paler like Poland, with PLC's shade of pink
 
 
-*/gfx/pictures/decisions/*  
+*/decisions/*  
 - removed loss of cores for PLC and PLR decisions
+- new "Renovate Warsaw University" decision
 
 
 */events/*
@@ -34,8 +35,8 @@
 - POL_monarchy: white-red bicolour with Polish eagle and crown
 
 
-*/gfx/pictures/events/*
-- event pictures for new events
+*/gfx/pictures/*
+- pictures for new events and decisions
 
 
 */localisation/*
