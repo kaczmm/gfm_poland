@@ -10,6 +10,11 @@
 #     1118007: Russia Refuses!
 #     1118008: Autonomy Restored
 #     1118009: Independence, under Russian Supervision
+# 1118010: Returning Exiles
+# 1118011: Wedding to the Sea
+# 1118012: The Grand Theatre of Warsaw
+# 1118013: Napoleon's Example - alliance with france
+#
 #
 # MONARCHS - in case i feel like writing events for their ascensions/deaths later
 #
@@ -28,40 +33,6 @@
 #     -son Michal Piotr (d. 1903) -- set up an orphanage, wrote plays, supported cultural stuff
 #       -brother Janusz Franciszek (d. 1967) -- senator, businessman and landholder. Foreign policy expert
 #		  -son Edmund
-#
-# Planned events:
-# 1118010: Return of the Exiles
-#     -MTTH 6 months; at peace
-#     -"Returning Exiles" modifier for 15 years
-#       *research points +5%
-#       *education efficiency +5%
-# 1118011: Marriage to the Sea
-#     -MTTH 1 day; owns at least 1 coastal province
-#     -Free prestige
-#  OR -Spend money for "Naval focus" modifier (temporary boost to naval research, ship building speed)
-# 1118012: The Grand Theatre of Warsaw
-#     -MTTH 1 month; owns Warsaw; at peace; date at least 24 Feb 1833
-#     -Prestige; Cultural tech boost
-#     -NOTE: construction began in 1825, so this should be an event
-# 1118013: Organic Work at Home (variant of the IRL thing, against landowners)
-#     -MTTH 2 years; debt law is Serfdom/Peonage
-#     -In a single region:
-#         -education eff +5%
-#		  -add con, +desire for abolish serfdom
-#      OR -Tank education eff, add militancy
-# 1118014: Jewish Community Threatened (maybe no... not sure if possible)
-#     -MTTH 1 year (faster if reactionaries in power); Ashkenazi not accepted
-#     -not sure yet, but this should be a possible event anywhere with >8% Ashkenazi pops
-# 1118015: Napoleon's Example (alliance with france)
-# -done!
-#
-# Planned decisions:
-# Renovate Warsaw University
-#     -Owns Warsaw
-#     -One time dump of research points
-# Land Reform
-#     -Debt law not Serfdom/Peonage; Economic policy not Laissez-Faire (ie oppose intervention)
-#     -Add "national chaos" modifier; Add mil for upper classes; Add "land reform" modifier (idk pop boost?)
 
 
 # The Fate of Poland - choose govt
@@ -382,13 +353,10 @@ country_event = {
 }
 
 
-# 1118010: Return of the Exiles
-#TODO -"Returning Exiles" modifier for 15 years
-#       *research points +5%
-#       *education efficiency +5%
+# 1118010: Returning Exiles
 country_event = {
 	id = 1118010
-	title = "Returning Polonia" # polonia is a term for the polish diaspora
+	title = "Returning Exiles" # polonia is a term for the polish diaspora
 	desc = "EVTDESC1118010" #TODO - something abt exiles after the third partition or after duchy of warsaw
 	picture = "poland_chopin" #TODO - idk just any picture of chopin or exiles in france
 	fire_only_once = yes
@@ -402,13 +370,17 @@ country_event = {
 
 	option = {
 		name = "We welcome them home."
-		#TODO add modifier that give +naval research speed for a modest sum
+
+		years_of_research = 2.5 # Transfer of knowledge
+		add_country_modifier = { # Mildly buffs education eff. and literacy impact
+			name = reading
+			duration = 9125 # 25 years
+		}
 	}
 }
 
 
 # 1118011: Wedding to the Sea
-#TODO - "Naval focus" modifier (temporary boost to naval research, ship building speed)
 country_event = {
 	id = 1118011
 	title = "Wedding to the Sea"
@@ -425,8 +397,13 @@ country_event = {
 	mean_time_to_happen = { months = 2 }
 
 	option = {
-		name = "The sea! Our sea!" # Morze, nasze morze (patriotic song)
-		#TODO add modifier that give +naval research speed for a modest sum
+		name = "Let's open a naval academy, as well."
+		
+		add_tax_relative_income = -2 # costs 2 years of income
+		add_country_modifier = {
+			name = naval_school
+			duration = -1
+		}
 	}
 	option = {
 		name = "It will make a nice painting, I suppose."
@@ -454,53 +431,18 @@ country_event = {
 	option = {
 		name = "A grand nation needs a grand theatre."
 		prestige = 2
-	}
-}
-
-
-# 1118013: Book Club
-country_event = {
-	id = 1118013
-	title = "Book Club"
-	desc = "EVTDESC1118013" #TODO - basically liberal book clubs promoting liberty, political consciousness, and abolition of serfdom
-	picture = "poland_serfs" #TODO - photo of polish book club? serfs? organic work?
-	
-	trigger = {
-		tag = POL
-		serfdom = yes #TODO - check GFM for this trigger
-	}
-
-	mean_time_to_happen = { months = 2 }
-
-	option = {
-		name = "An excellent idea. Anything to educate the masses."
-
-		#TODO - add modifier that gives education eff +5%, con +0.01
-		#TODO - add +desire for abolish serfdom
-		
-        ai_chance = { factor = 1 }
-	}
-	option = {
-		name = "They should get back to work."
-		
-		#TODO - add 1 militancy to any lower class pops in a random province
-		
-        ai_chance = { # AI more likely to do this if right wing
-			factor = 0.1
-			modifier = {
-				factor = 100
-				OR = { ruling_party_ideology = conservative  ruling_party_ideology = reactionary }
-			}
+		add_country_modifier = { # +5% education eff, +5% immigration
+			name = opera_house
+			duration = -1
 		}
 	}
 }
 
-
-# 1118015: Napoleon's Example (alliance with france)
+# 1118013: Napoleon's Example (alliance with france)
 country_event = {
-	id = 1118015
+	id = 1118013
 	title = "Napoleon's Example" # reference to "Dal nam przyklad Bonaparte jak zwyciezac mamy" (Bonaparte gave us an example of how we should win)
-	desc = "EVTDESC1118015" #TODO - mention franco-polish friendship, ties, liberalism, duchy of warsaw, etc
+	desc = "EVTDESC1118013" #TODO - mention franco-polish friendship, ties, liberalism, duchy of warsaw, etc
 	picture = "poland_france" #TODO - photo of polish and french officers mingling?
 	
 	trigger = {
@@ -542,6 +484,6 @@ country_event = {
 	}
 	option = {
 		name = "France? I'd rather not."
-		prestige = 5
+		prestige = 2
 	}
 }

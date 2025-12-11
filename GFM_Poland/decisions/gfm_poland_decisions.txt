@@ -1,0 +1,23 @@
+political_decisions = {
+    renovate_warsaw_university = {
+        picture = warsaw_university_picture
+        potential = {
+            primary_culture = polish
+            owns = 706
+            NOT = { has_country_flag = warsaw_university }
+        }
+
+        allow = {
+            war = no
+            in_default = no
+            money = 25000 # no clue how much this should cost...
+        }
+
+        effect = {
+            money -25000
+		    years_of_research = 2.5
+            set_country_flag = warsaw_university
+        }
+        ai_will_do = { factor = 1 }
+    }
+}

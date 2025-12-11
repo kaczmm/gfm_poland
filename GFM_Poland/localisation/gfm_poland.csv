@@ -8,3 +8,18 @@ EVTDESC1118006;\n\nDespite the relative success of their little uprising, it see
 EVTDESC1118007;\n\nRussia has refused our offer of peace. Only blood will end this war.;;;;;;;;;;;;;
 EVTDESC1118008;\n\nRussia has accepted our offer to return to status quo ante bellum. The Sejm will soon reconvene to reverse Tsar Nicholas I's dethronement, and Poland will return to its personal union under Russia.;;;;;;;;;;;;;
 EVTDESC1118009;\n\nRussia has accepted our offer of peace. Poland will remain an independent state, with its diplomatic affairs controlled by Russia... on paper, at least.;;;;;;;;;;;;;
+EVTDESC1118010;\n\nTODO - Returning Exiles;;;;;;;;;;;;;
+EVTDESC1118011;\n\nTODO - Wedding to the sea;;;;;;;;;;;;;
+EVTDESC1118012;\n\nTODO - Grand Theatre of Warsaw;;;;;;;;;;;;;
+EVTDESC1118013;\n\nTODO - Napoleon's Example;;;;;;;;;;;;;
+renovate_warsaw_university_title;Renovate Warsaw University;;;;;;;;;;;;;
+renovate_warsaw_university_desc;TODO - description (real);;;;;;;;;;;;;
+PLC_ADJ;Polish;;;;;;;;;;;;;
+PLR;The Commonwealth;;;;;;;;;;;;;
+PLR_ADJ;Polish;;;;;;;;;;;;;
+PLR_democracy;The Commonwealth;;;;;;;;;;;;;
+PLR_fascist_dictatorship;The Commonwealth;;;;;;;;;;;;;
+PLR_proletarian_dictatorship;The Commonwealth;;;;;;;;;;;;;
+PLR_absolute_monarchy;The Commonwealth;;;;;;;;;;;;;
+PLR_prussian_constitutionalism;The Commonwealth;;;;;;;;;;;;;
+PLR_hms_government;The Commonwealth;;;;;;;;;;;;;
