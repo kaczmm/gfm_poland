@@ -45,6 +45,7 @@
 
 
 <h3>Planned content:</h3>
+
 - event: Support the Greater Polish Uprising of 1848
   - Poland can annex Greater Poland, though Prussia will immediately declare war
   - Note to self: maybe make this a 1 on 1 war? So Prussia can't call 5 million allies?
