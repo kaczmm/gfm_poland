@@ -19,7 +19,7 @@
 #     -brother Wladyslaw (d. 1893)
 #       (-son August (d. 1893) -- very frail, constantly sick)
 #       -son Adam Ludwik (d. 1937)
-#         -son Augustyn Józef (d. 1946) -- also had bad health, lived in exile in spain
+#         -son Augustyn Jozef (d. 1946) -- also had bad health, lived in exile in spain
 #           -son Adam Karol (still alive in 2025)
 #
 # Radziwill succession:
@@ -49,12 +49,11 @@
 #         -education eff +5%
 #		  -add con, +desire for abolish serfdom
 #      OR -Tank education eff, add militancy
-# 1118014: Jewish Community Threatened
+# 1118014: Jewish Community Threatened (maybe no... not sure if possible)
 #     -MTTH 1 year (faster if reactionaries in power); Ashkenazi not accepted
 #     -not sure yet, but this should be a possible event anywhere with >8% Ashkenazi pops
 # 1118015: Napoleon's Example (alliance with france)
-#     -MTTH 1 year; relations with france +50; rank >16; France is NOT allied with PRU, GER, AUS, KUK, RUS
-#     -option to form alliance w France (also increases relations +25)
+# -done!
 #
 # Planned decisions:
 # Renovate Warsaw University
@@ -88,7 +87,7 @@ country_event = {
 		government = democracy
 		set_country_flag = pol_revolution # means PRU and AUS can intervene
 		war_exhaustion = -25 # regrouping effect - poland will fight harder but still lose
-		prestige = 25
+		prestige = 5 #25
 		add_country_modifier = { # Revolution is messy
 			name = national_instability
 			duration = 365
@@ -384,27 +383,118 @@ country_event = {
 
 
 # 1118010: Return of the Exiles
-#     -MTTH 6 months; at peace
-#     -"Returning Exiles" modifier for 15 years
+#TODO -"Returning Exiles" modifier for 15 years
 #       *research points +5%
 #       *education efficiency +5%
-# 1118011: Marriage to the Sea
-#     -MTTH 1 day; owns at least 1 coastal province
-#     -Free prestige
-#  OR -Spend money for "Naval focus" modifier (temporary boost to naval research, ship building speed)
+country_event = {
+	id = 1118010
+	title = "Returning Polonia" # polonia is a term for the polish diaspora
+	desc = "EVTDESC1118010" #TODO - something abt exiles after the third partition or after duchy of warsaw
+	picture = "poland_chopin" #TODO - idk just any picture of chopin or exiles in france
+	fire_only_once = yes
+	
+	trigger = {
+		tag = POL
+		war = no
+	}
+
+	mean_time_to_happen = { months = 3 }
+
+	option = {
+		name = "We welcome them home."
+		#TODO add modifier that give +naval research speed for a modest sum
+	}
+}
+
+
+# 1118011: Wedding to the Sea
+#TODO - "Naval focus" modifier (temporary boost to naval research, ship building speed)
+country_event = {
+	id = 1118011
+	title = "Wedding to the Sea"
+	desc = "EVTDESC1118011" #TODO - blurb from wikipedia or something
+	picture = "poland_sea" #TODO - the famous painting of Gen. Haller
+	fire_only_once = yes
+	
+	trigger = {
+		tag = POL
+		war = no
+		any_owned_province = { is_coastal = yes }
+	}
+
+	mean_time_to_happen = { months = 2 }
+
+	option = {
+		name = "The sea! Our sea!" # Morze, nasze morze (patriotic song)
+		#TODO add modifier that give +naval research speed for a modest sum
+	}
+	option = {
+		name = "It will make a nice painting, I suppose."
+		prestige = 2
+	}
+}
+
+
 # 1118012: The Grand Theatre of Warsaw
-#     -MTTH 1 month; owns Warsaw; at peace; date at least 24 Feb 1833
-#     -Prestige; Cultural tech boost
-#     -NOTE: construction began in 1825, so this should be an event
-# 1118013: Organic Work at Home (variant of the IRL thing, against landowners)
-#     -MTTH 2 years; debt law is Serfdom/Peonage
-#     -In a single region:
-#         -education eff +5%
-#		  -add con, +desire for abolish serfdom
-#      OR -Tank education eff, add militancy
-# 1118014: Jewish Community Threatened
-#     -MTTH 1 year (faster if reactionaries in power); Ashkenazi not accepted
-#     -not sure yet, but this should be a possible event anywhere with >8% Ashkenazi pops
+country_event = {
+	id = 1118012
+	title = "Grand Theatre of Warsaw Complete!"
+	desc = "EVTDESC1118012" #TODO - blurb from wikipedia or something
+	picture = "poland_theatre" #TODO - photo of the grand theatre of warsaw
+	fire_only_once = yes
+	
+	trigger = {
+		tag = POL
+		year = 1833
+		war = no # not necessary, but would prefer during peace
+	}
+
+	mean_time_to_happen = { months = 2 }
+
+	option = {
+		name = "A grand nation needs a grand theatre."
+		prestige = 2
+	}
+}
+
+
+# 1118013: Book Club
+country_event = {
+	id = 1118013
+	title = "Book Club"
+	desc = "EVTDESC1118013" #TODO - basically liberal book clubs promoting liberty, political consciousness, and abolition of serfdom
+	picture = "poland_serfs" #TODO - photo of polish book club? serfs? organic work?
+	
+	trigger = {
+		tag = POL
+		serfdom = yes #TODO - check GFM for this trigger
+	}
+
+	mean_time_to_happen = { months = 2 }
+
+	option = {
+		name = "An excellent idea. Anything to educate the masses."
+
+		#TODO - add modifier that gives education eff +5%, con +0.01
+		#TODO - add +desire for abolish serfdom
+		
+        ai_chance = { factor = 1 }
+	}
+	option = {
+		name = "They should get back to work."
+		
+		#TODO - add 1 militancy to any lower class pops in a random province
+		
+        ai_chance = { # AI more likely to do this if right wing
+			factor = 0.1
+			modifier = {
+				factor = 100
+				OR = { ruling_party_ideology = conservative  ruling_party_ideology = reactionary }
+			}
+		}
+	}
+}
+
 
 # 1118015: Napoleon's Example (alliance with france)
 country_event = {
@@ -412,7 +502,6 @@ country_event = {
 	title = "Napoleon's Example" # reference to "Dal nam przyklad Bonaparte jak zwyciezac mamy" (Bonaparte gave us an example of how we should win)
 	desc = "EVTDESC1118015" #TODO - mention franco-polish friendship, ties, liberalism, duchy of warsaw, etc
 	picture = "poland_france" #TODO - photo of polish and french officers mingling?
-	fire_only_once = yes
 	
 	trigger = {
 		tag = POL
@@ -424,9 +513,20 @@ country_event = {
 				alliance_with = GER # alliance with strong germany more important
 				alliance_with = PRU
 				alliance_with = AUS
+				alliance_with = POL # otherwise you wouldn't need this event...
 			}
 		}
 		relation = { who = FRA  value = 15 } # vaguely "good" relations
+	}
+
+	# Should be <1 year but about 25 years if they allied you before
+	mean_time_to_happen = {
+		months = 1
+
+		modifier = {
+			factor = 24
+			limit = { has_country_flag = poland_france_allied }
+		}
 	}
 
 	option = {
@@ -438,6 +538,7 @@ country_event = {
 		}
 		
         ai_chance = { factor = 1 }
+		set_country_flag = poland_france_allied
 	}
 	option = {
 		name = "France? I'd rather not."
