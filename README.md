@@ -53,10 +53,9 @@
   - Note to self: maybe make this a 1 on 1 war, as noted above
 - event: Jewish Community Threatened
   - can happen if ashkenazi not accepted AND any province >8% ashkenazi
-    - basically to pressure the player into taking the jewish rights decision
   - Nice option (adds consciousness and desire for culture law change)
   - Mean option (adds militancy, decreases ashkenazi population by 1%, adds modifier tax income -25% in that province)
-- event: Organic Work? Book Clubs? idk (basically spontaneous liberty associations / land reform pressure)
+- event: Organic Work? Book Clubs? idk (basically spontaneous liberty associations or land reform pressure)
   - MTTH 2 years; debt law is Serfdom/Peonage
   - In a single region:
     - education eff +5%
