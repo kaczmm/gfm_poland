@@ -89,6 +89,11 @@ country_event = {
 			duration = 10000 # about 28 years - about 1860
 		}
 		plurality = -10 # the revolution is blunted by the feeling of return to monarchy
+		
+		# If I decide to override GFM event_modifiers file...
+		# modifier name = "King Adam I"
+		# duration = 28 years, his historical lifespan
+		# effect is same as "great statesman" but you get to hang on to it
 	}
 }
 
@@ -228,6 +233,11 @@ country_event = {
 		clr_country_flag = pol_revolution
 		
         ai_chance = { factor = 0.4 }
+		
+		# If I decide to override GFM event_modifiers file...
+		# modifier name = "King Michal I"
+		# duration = 17 years, his historical lifespan
+		# effect is same as "military_man" but you get to hang on to it
 	}
 	option = {
 		name = "The regency train stops at independence station."
@@ -377,6 +387,14 @@ country_event = {
 			name = reading
 			duration = 9125 # 25 years
 		}
+
+		# If I decide to override GFM event_modifiers file...
+		# modifier name = "Returning Exiles"
+		# duration = 25 years
+		# +0.01 prestige
+		# +5% education efficiency
+		# +0.01 support for liberalism (ie exiles adopted French liberalism)
+		# +0.1 leadership (returning generals)
 	}
 }
 
@@ -405,6 +423,12 @@ country_event = {
 			name = naval_school
 			duration = -1
 		}
+
+		# If I decide to override GFM event_modifiers file...
+		# modifier name = "Naval focus"
+		# duration = 25 years
+		# +10% naval research speed
+		# +25% shipbuilding speed
 	}
 	option = {
 		name = "It will make a nice painting, I suppose."
