@@ -8,8 +8,9 @@ political_decisions = {
         }
 
         allow = {
+            year = 1835 # make sure it's after the war
+            is_subject = no
             war = no
-            in_default = no
             money = 25000 # no clue how much this should cost...
         }
 

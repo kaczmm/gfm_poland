@@ -373,6 +373,8 @@ country_event = {
 	
 	trigger = {
 		OR = { tag = POL  tag = PLC  tag = PLR }
+		year = 1835
+        is_subject = no
 		war = no
 	}
 
@@ -409,6 +411,8 @@ country_event = {
 	
 	trigger = {
 		tag = POL
+		year = 1835
+        is_subject = no
 		war = no
 		any_owned_province = { is_coastal = yes }
 	}
@@ -472,6 +476,8 @@ country_event = {
 	
 	trigger = {
 		tag = POL
+		year = 1835
+        is_subject = no
 		war = no
 		rank = 16 # Poland must be relevant
 		FRA = {
