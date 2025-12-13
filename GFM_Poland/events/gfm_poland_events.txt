@@ -374,7 +374,7 @@ country_event = {
 	trigger = {
         primary_culture = polish
 		year = 1835
-        is_subject = no
+        is_vassal = no
 		war = no
 	}
 
@@ -412,7 +412,7 @@ country_event = {
 	trigger = {
 		tag = POL
 		year = 1835
-        is_subject = no
+        is_vassal = no
 		war = no
 		any_owned_province = { is_coastal = yes }
 	}
@@ -477,7 +477,7 @@ country_event = {
 	trigger = {
 		tag = POL
 		year = 1835
-        is_subject = no
+        is_vassal = no
 		war = no
 		rank = 16 # Poland must be relevant
 		FRA = {

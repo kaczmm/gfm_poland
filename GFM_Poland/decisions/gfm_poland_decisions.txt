@@ -3,19 +3,19 @@ political_decisions = {
         picture = warsaw_university_picture
         potential = {
             primary_culture = polish
+            year = 1835 # make sure it's after the war
             owns = 706
             NOT = { has_country_flag = warsaw_university }
+            is_vassal = no
         }
 
         allow = {
-            year = 1835 # make sure it's after the war
-            is_subject = no
             war = no
             money = 25000 # no clue how much this should cost...
         }
 
         effect = {
-            money -25000
+            money = -25000
 		    years_of_research = 2.5
             set_country_flag = warsaw_university
         }
