@@ -372,7 +372,7 @@ country_event = {
 	fire_only_once = yes
 	
 	trigger = {
-		OR = { tag = POL  tag = PLC  tag = PLR }
+        primary_culture = polish
 		year = 1835
         is_subject = no
 		war = no
